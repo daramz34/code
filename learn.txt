@@ -81,3 +81,14 @@ The -m stands for message.
 
 You must always describe what you did (e.g., "Added the about page"). This helps you "travel back in time" later because 
 you’ll know exactly what each snapshot contains.
+
+
+
+Why do we use them?
+In the GDGoC Challenge Day 3, they want you to use a branching strategy.
+
+main branch: This is for code that is 100% finished and working.
+
+develop branch: This is where you do your daily work, make mistakes, and test things out.
+
+By working on a develop branch, you ensure that your main branch stays clean and professional at all times.
