@@ -1,0 +1,14 @@
+[
+    {
+        "Amount": 700.0,
+        "Category": "rice"
+    },
+    {
+        "Amount": 400.0,
+        "Category": "apple"
+    },
+    {
+        "Amount": 6900.0,
+        "Category": "beans"
+    }
+]

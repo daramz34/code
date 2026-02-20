@@ -1,0 +1,83 @@
+Routes or Endpoints are paths in ur url that tells the server exactly waht resource you want 
+to access
+
+
+http://127.0.0.1:8000/ is the Root.
+
+http://127.0.0.1:8000/about is the About page.
+
+
+
+
+
+
+API - Application Programming Interface
+when a program communicate with another
+
+API ANALOGY
+
+a truck in New york carrying goods to NEw jesery
+it passes a bridge
+and it reaches new jesery
+
+
+NEW york -----> bridge ------> NEw jesery
+Client          API            API server
+
+
+API helps access resources that someone else created, in a very organized way
+
+
+What are Routes
+A Route (or Endpoint) is the specific path at the end of a URL (like /about or /status).
+http://127.0.0.1:8000
+
+http://127.0.0.1:8000/ is the Root.
+
+http://127.0.0.1:8000/about is the About page.
+
+
+
+
+
+
+GIT = Version control
+tracks changes in your code.
+
+
+
+GitHub = Cloud Storage for Code
+
+Where you upload and share projects.
+
+
+
+
+
+Git is a Time Machine for your code. Instead of making 100 copies of a file, Git stays inside your folder and takes "snapshots" (called Commits) of your work. If you break your code on Tuesday, you can use Git to
+ "travel back in time" to exactly how the code looked on Monday.
+
+The Terminal and the Save cycle
+
+1. git status (The "Check-in")
+Before you do anything, you ask Git: "What's going on right now?"
+
+It tells you which branch you are on.
+
+It tells you if you have any new changes that haven't been saved yet.
+
+
+2. git add . (The "Staging")
+Imagine you are packing a box to send to a friend.
+
+Putting items on the table to see what fits is git add.
+
+The . means "Add everything in this folder."
+
+3. git commit -m "message" (The "Snapshot")
+This is closing the box and taping it shut.
+
+The -m stands for message.
+
+You must always describe what you did (e.g., "Added the about page"). This helps you "travel back in time" later because 
+you’ll know exactly what each snapshot contains.
