@@ -4132,4 +4132,158 @@
 
 
 
+#STopWatch + Digital Clock App
 
+import sys
+from PyQt5.QtWidgets import QMainWindow, QWidget, QApplication, QLabel, QPushButton, QVBoxLayout
+from PyQt5.QtCore import QTime, QTimer, Qt
+from PyQt5.QtGui import QFont, QFontDatabase
+
+class MainWin(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setGeometry(500,300,600,500)
+        self.setWindowTitle("Stopwatch + Digital Clock App")
+        
+        self.clock_label = QLabel(self)
+        self.stop_watch = QLabel("00:00:00",self)
+        self.elapsed_time = QTime(0,0,0)
+
+        self.start_button = QPushButton("Start",self)
+        self.stop_button = QPushButton("Stop",self)
+        self.reset_button = QPushButton("Reset", self)
+
+
+        self.clock_timer = QTimer(self)
+        self.stopwatch_timer = QTimer(self)
+
+        self.initUI()
+
+    
+    def initUI(self):
+        central_widgit =  QWidget()
+        self.setCentralWidget(central_widgit)
+        vbox = QVBoxLayout()
+        central_widgit.setLayout(vbox)
+
+        vbox.addWidget(self.clock_label)
+        vbox.addWidget(self.stop_watch)
+        vbox.addWidget(self.start_button)
+        vbox.addWidget(self.stop_button)
+        vbox.addWidget(self.reset_button)
+
+        self.clock_label.setAlignment(Qt.AlignCenter)
+        self.stop_watch.setAlignment(Qt.AlignCenter)
+
+
+        self.start_button.setObjectName("start_button")
+        self.stop_button.setObjectName("stop_button")
+        self.reset_button.setObjectName("reset_button")
+        self.clock_label.setObjectName("clock_label")
+        self.stop_watch.setObjectName("stop_watch")
+
+        
+        font_id = QFontDatabase.addApplicationFont("DS-DIGIT.TTF")
+        font_id2 = QFontDatabase.addApplicationFont("DS-DIGII.TTF")
+
+        
+        font_family1 = QFontDatabase.applicationFontFamilies(font_id)[0]
+        font_family2 = QFontDatabase.applicationFontFamilies(font_id2)[0]
+         
+
+        my_font1 = QFont(font_family1, 130)
+        my_font2 = QFont(font_family2, 110)
+
+        self.clock_label.setFont(my_font1)
+        self.stop_watch.setFont(my_font2)
+
+        
+        
+
+        self.setStyleSheet(
+            """
+            QLabel#clock_label{
+            color: green;
+
+            }
+            QLabel#stop_watch{
+            color: blue;
+
+            }
+            QLabel{
+            
+            font-weight: bold;
+            
+            }
+
+            QPushButton{
+            font-size: 50px;
+            font-family: Arial;
+            
+            }
+            QPushButton:hover{
+            background-color: lightblue;
+            color: white;
+            }
+
+
+           
+            """
+        )
+        
+
+        self.start_button.clicked.connect(self.start_stopwatch)
+        self.stop_button.clicked.connect(self.stop_stopwatch)
+        self.reset_button.clicked.connect(self.reset_stopwatch)
+        self.clock_timer.timeout.connect(self.update_clock)
+        self.clock_timer.start(1000)
+        self.stopwatch_timer.timeout.connect(self.stopwatch_update)
+        
+
+
+        self.update_clock()
+
+    
+
+    def start_stopwatch(self):
+        self.stopwatch_timer.start(1000)
+
+    def stop_stopwatch(self):
+        self.stopwatch_timer.stop()
+
+    def reset_stopwatch(self):
+        self.stopwatch_timer.stop()
+        self.elapsed_time = QTime(0,0,0)
+        self.stop_watch.setText(self.format_time(self.elapsed_time))
+    
+
+
+
+        
+
+    def update_clock(self):
+        current_time = QTime.currentTime().toString("hh:mm:ss AP")
+        self.clock_label.setText(current_time)
+    
+
+    def format_time(self,time):
+        hours = time.hour()
+        minutes = time.minute()
+        seconds = time.second()
+        
+        return f"{hours:02}:{minutes:02}:{seconds:02}"
+
+    def stopwatch_update(self):
+        self.elapsed_time = self.elapsed_time.addSecs(1)
+        self.stop_watch.setText(self.format_time(self.elapsed_time))
+
+        
+def main():
+    app = QApplication(sys.argv)
+    window = MainWin()
+    window.show()
+    sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
+    main()
