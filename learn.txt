@@ -82,7 +82,11 @@ The -m stands for message.
 You must always describe what you did (e.g., "Added the about page"). This helps you "travel back in time" later because 
 you’ll know exactly what each snapshot contains.
 
+4. get push- to update the GitHub
 
+5. get pull - to bring an update from github to local host
+
+6. get commit -am "message"
 
 Why do we use them?
 In the GDGoC Challenge Day 3, they want you to use a branching strategy.
