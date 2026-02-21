@@ -4146,7 +4146,7 @@ class MainWin(QMainWindow):
         self.setWindowTitle("Stopwatch + Digital Clock App")
         
         self.clock_label = QLabel(self)
-        self.stop_watch = QLabel("00:00:00",self)
+        self.stop_watch = QLabel("00:00:00", self)
         self.elapsed_time = QTime(0,0,0)
 
         self.start_button = QPushButton("Start",self)
@@ -4154,17 +4154,17 @@ class MainWin(QMainWindow):
         self.reset_button = QPushButton("Reset", self)
 
 
-        self.clock_timer = QTimer(self)
-        self.stopwatch_timer = QTimer(self)
+        self.clock_timer = QTimer()
+        self.stopwatch_timer = QTimer()
 
         self.initUI()
 
     
     def initUI(self):
-        central_widgit =  QWidget()
-        self.setCentralWidget(central_widgit)
+        central_widget =  QWidget()
+        self.setCentralWidget(central_widget)
         vbox = QVBoxLayout()
-        central_widgit.setLayout(vbox)
+        central_widget.setLayout(vbox)
 
         vbox.addWidget(self.clock_label)
         vbox.addWidget(self.stop_watch)
@@ -4190,6 +4190,21 @@ class MainWin(QMainWindow):
         font_family1 = QFontDatabase.applicationFontFamilies(font_id)[0]
         font_family2 = QFontDatabase.applicationFontFamilies(font_id2)[0]
          
+        font_id = QFontDatabase.addApplicationFont("DS-DIGIT.TTF")
+        if font_id == -1:
+            print("Warning: DS-DIGIT.TTF not found, using default font")
+            font_family1 = "Arial"  # fallback
+        else:
+            font_family1 = QFontDatabase.applicationFontFamilies(font_id)[0]
+
+        
+        if font_id2 == -1:
+            print("Warning: DS-DIGIT.TTF not found, using default font")
+            font_family2 = "Arial"  # fallback
+        else:
+            font_family2 = QFontDatabase.applicationFontFamilies(font_id2)[0]
+
+        
 
         my_font1 = QFont(font_family1, 130)
         my_font2 = QFont(font_family2, 110)
@@ -4204,30 +4219,21 @@ class MainWin(QMainWindow):
             """
             QLabel#clock_label{
             color: green;
-
             }
             QLabel#stop_watch{
             color: blue;
-
             }
             QLabel{
-            
             font-weight: bold;
-            
             }
-
             QPushButton{
             font-size: 50px;
             font-family: Arial;
-            
             }
             QPushButton:hover{
             background-color: lightblue;
             color: white;
             }
-
-
-           
             """
         )
         
@@ -4245,11 +4251,18 @@ class MainWin(QMainWindow):
 
     
 
+
+
     def start_stopwatch(self):
-        self.stopwatch_timer.start(1000)
+        if not self.stopwatch_timer.isActive():
+            self.stopwatch_timer.start(1000)
+            self.start_button.setEnabled(False)  # Prevent double-start
+            self.stop_button.setEnabled(True)
 
     def stop_stopwatch(self):
         self.stopwatch_timer.stop()
+        self.start_button.setEnabled(True)
+        self.stop_button.setEnabled(False)
 
     def reset_stopwatch(self):
         self.stopwatch_timer.stop()
