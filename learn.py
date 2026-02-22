@@ -23,10 +23,43 @@
 
 
 
+# from fastapi import FastAPI
+
+# app = FastAPI() #creates the brain of the server
+
+# @app.get("/") # when the client goes to the home page, this function will be called
+# def say_hello(): # runs this function when the client goes to the home page
+#     return {"msg": "Hello World"} # returns a dictionary with a message key and a value of "Hello World"
+
+
+
+# revison on day4
+
+# we used path parameters = /user/{user_id}
+
+# type conversion = user_id: int
+# @app.get("/user/{user_id}")
+# def get_user(user_id: int):
+#     return {"user_id": user_id}
+
+
+
 from fastapi import FastAPI
 
-app = FastAPI() #creates the brain of the server
+app = FastAPI()
+@app.get("/")
+def welcome():
+    return {"Message": "Welcome!!!"}
 
-@app.get("/") # when the client goes to the home page, this function will be called
-def say_hello(): # runs this function when the client goes to the home page
-    return {"msg": "Hello World"} # returns a dictionary with a message key and a value of "Hello World"
+@app.get("/Create/profile/{username}")
+def create_profile(username: str):
+    return {"Username": username, "Status": "Active"}
+
+@app.get("/create/post/{post_id}")
+def create_post(post_id: int):
+    return {"Post ID": post_id, "Title": "Sample Post"}
+
+@app.get("/create/product/{product_name}/{price}")
+def create_product(product_name: str, price: float):
+    return {"Product": product_name, "Price": price}
+
