@@ -100,3 +100,20 @@ main branch: This is for code that is 100% finished and working.
 develop branch: This is where you do your daily work, make mistakes, and test things out.
 
 By working on a develop branch, you ensure that your main branch stays clean and professional at all times.
+
+
+
+
+
+diff btw develop branch and main branch
+| Branch    | Purpose               | When To Use            |
+| --------- | --------------------- | ---------------------- |
+| `main`    | Production-ready code | Final, working version |
+| `develop` | Work in progress      | Testing, new features  |
+
+| To Switch                  | Command                   |
+| -------------------------- | ------------------------- |
+| Rename `develop` to `main` | `git branch -M main`      |
+| Push to `main` instead     | `git push -u origin main` |
+
+
