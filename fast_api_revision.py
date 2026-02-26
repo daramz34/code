@@ -314,30 +314,76 @@
 
 
 
+# from fastapi import FastAPI
+# from datetime import datetime
+
+# app = FastAPI()
+
+
+# @app.get("/")
+# def home():
+#     return {"name": "daramz",
+#             "version": 1.0,
+#             "description": "good"}
+
+# @app.get("/health")
+# def health():
+#     return {"status" : "Healthy",
+#             "uptime": "100%"}
+
+# @app.get("/time")
+# def time():
+#     return{"timestamp": datetime.now().isoformat(),
+#            "timezone": "local"}
+
+# @app.get("/author")
+# def author():
+#     return {"Author": "Daramz",
+#             "email": "adarmz@gamil.com",
+#             "github": "github.com/daramz"}
+
+
+
+
+
+
 from fastapi import FastAPI
-from datetime import datetime
 
 app = FastAPI()
 
 
-@app.get("/")
-def home():
-    return {"name": "daramz",
-            "version": 5.04,
-            "description": "good"}
 
-@app.get("/health")
-def health():
-    return {"Status" : "Healthy"}
+@app.get("/about")
+def about():
+    return {
+        "name" : "Task Manager API",
+        "description" : "Manage daily tasks efficiently",
+        "author" : "Daramz",
+        "features" : ["create", "read", "update", "delete", "filter"]    
+        }
 
-@app.get("/time")
-def time():
-    current_time = datetime.now().strftime("%H:%M:%S")
-    return{current_time}
+@app.get("/status")
+def status():
+    return {
+        "status": "operational",
+        "database": "connected",
+        "version": "1.0",
+        "uptime" : "99.9%"
+    }
 
-@app.get(".author")
-def author():
-    return {"Author": "Daramz"}
+@app.get("/routes")
+def routes():
+    return {
+        "endpoints": [
+        {"path": "/about", "method": "GET", "description": "API information"},
+        {"path": "/status", "method": "GET", "description": "Health check"},
+        {"path": "/routes", "method": "GET", "description": "This list"}]
+}
 
-
-
+@app.get("/docs")
+def docs():
+    return {
+        "message": "Interactive API documentation",
+        "url": "http://127.0.0.1:8000/docs",
+        "alternative": "http://127.0.0.1:8000/redoc"
+    }
