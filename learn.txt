@@ -117,3 +117,72 @@ diff btw develop branch and main branch
 | Push to `main` instead     | `git push -u origin main` |
 
 
+
+
+
+
+
+
+
+
+
+
+
+API INTRO AGAIN
+
+WITHOUT API (DIRECT DATABASE ACCESS)
+Your App ──────► Database
+                (DANGEROUS!)
+
+
+WITH API (CLEAN SEPARATION)
+Your App ──────► API ──────► Database
+ (Client)       (Waiter)     (Kitchen)
+
+
+
+ TYPES OF API
+ | Type          | Use Case           | Example          |
+| ------------- | ------------------ | ---------------- |
+| **REST**      | Web services, CRUD | Your FastAPI app |
+| **GraphQL**   | Flexible queries   | Facebook         |
+| **WebSocket** | Real-time chat     | WhatsApp         |
+| **RPC**       | Internal services  | Microservices    |
+
+API = Messenger between apps. You ask, it delivers.
+
+| Code    | Meaning          | When                   |
+| ------- | ---------------- | ---------------------- |
+| **200** | OK               | Success                |
+| **201** | Created          | New resource made      |
+| **400** | Bad Request      | Your fault (bad input) |
+| **404** | Not Found        | URL doesn't exist      |
+| **422** | Validation Error | FastAPI auto-checks    |
+| **500** | Server Error     | Code crashed           |
+
+
+
+GET - READ - RETURN INFO - @app.get("/items/")
+POST- CREATE - SENDING INFO/CREATING DATA @app.post("/items/)
+PUT- UPDATE -   UPDATE/MODIFY @app.put("/items/{id})
+DELETE- DELETE -DELETE @app.delete("/items/{id})
+
+
+
+
+PATH PARAMETER
+from fastapi import Path
+
+@app.get("/items/{item_id}")
+def get_item(item_id: int = Path(..., gt=0)):
+    return {"item_id": item_id}
+
+
+Query PARAMETER
+@app.get("/items/")
+def search_items(
+    q: str = None,                    # Optional
+    category: str = "all",            # Optional with default
+    max_price: float = 10000.0        # Optional with default
+):
+    return {"search": q, "cat": category, "max": max_price}
