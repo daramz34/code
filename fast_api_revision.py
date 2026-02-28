@@ -347,43 +347,405 @@
 
 
 
-from fastapi import FastAPI
+# from fastapi import FastAPI
+
+# app = FastAPI()
+
+
+
+# @app.get("/about")
+# def about():
+#     return {
+#         "name" : "Task Manager API",
+#         "description" : "Manage daily tasks efficiently",
+#         "author" : "Daramz",
+#         "features" : ["create", "read", "update", "delete", "filter"]    
+#         }
+
+# @app.get("/status")
+# def status():
+#     return {
+#         "status": "operational",
+#         "database": "connected",
+#         "version": "1.0",
+#         "uptime" : "99.9%"
+#     }
+
+# @app.get("/routes")
+# def routes():
+#     return {
+#         "endpoints": [
+#         {"path": "/about", "method": "GET", "description": "API information"},
+#         {"path": "/status", "method": "GET", "description": "Health check"},
+#         {"path": "/routes", "method": "GET", "description": "This list"}]
+# }
+
+# @app.get("/docs")
+# def docs():
+#     return {
+#         "message": "Interactive API documentation",
+#         "url": "http://127.0.0.1:8000/docs",
+#         "alternative": "http://127.0.0.1:8000/redoc"
+#     }
+
+
+
+
+
+# # calculator api with path parameters
+
+
+# from fastapi import FastAPI
+# from fastapi import Path
+
+
+# app = FastAPI()
+
+
+
+# @app.get("/math/add/{a}/{b}")
+# def add(a: int, b: int):
+#     return {
+#         "operation" : "add",
+#         "a" : a,
+#         "b" : b,
+#         "result ": a + b
+#         }
+
+
+# @app.get("/math/subtract/{a}/{b}")
+# def sub(a: int, b: int):
+#     return {
+#         "operation" : "subtraction",
+#         "a" : a,
+#         "b" : b,
+#         "result ": a - b
+#     }
+
+# @app.get("/math/multiply/{a}/{b}")
+# def multiply(a:int, b:int):
+#     return {
+#         "operation" : "multiplication",
+#         "a" : a,
+#         "b" : b,
+#         "result": a * b
+#     }
+
+# @app.get("/math/divide/{a}/{b}")
+# def div(a:int, b:int):
+#     if b == 0:
+#         return {"error": "Cannot divide by Zero",
+#                 "a":a, "b":b}
+#     return {
+#         "operation" : "divide",
+#         "a" : a,
+#         "b" : b,
+#         "result": a / b
+        
+#     }
+
+# @app.get("/math/power/{base}/{exp}")
+# def pow(base:int = Path(..., ge=0, le=10), 
+#         exp:int= Path(..., ge=0, le=10)):
+#     return {
+#         "The power is": base**exp
+#     }
+
+# @app.get("/math/mod/{a}/{b}")
+# def mod(a:int, b:int):
+#     return {
+#         "The modulo is": a % b
+#     }
+
+# @app.get("/text/upper/{text}")
+# def uppercase(text: str):
+
+#     return {
+#         "uppercase version" : text.upper()
+#     }
+
+# @app.get("/text/reverse/{text}")
+# def reverse(text: str):
+#     reversed_text = text[::-1]
+#     length = len(text)
+#     return {
+#        "original" : text,
+#         "reversed" : reversed_text,
+#         "length" : length
+        
+#     }
+    
+
+# @app.get("/text/len/{text}")
+# def length(text: str):
+  
+#     return {
+#         "character count" : len(text)
+#     }
+
+# @app.get("/text/words/{sentence}")
+# def word_count(sentence: str):
+#     return {
+#         "character count" : len(sentence.split())
+#     }
+
+
+
+
+
+# #ery parameters
+
+# from fastapi import FastAPI, Query
+# from typing import Optional
+
+# app = FastAPI()
+
+# products =[
+#     {"id": 1, "name": "Laptop", "category": "tech", "price": 999.99, "stock": 5},
+#     {"id": 2, "name": "Phone", "category": "tech", "price": 699.99, "stock": 10},
+#     {"id": 3, "name": "Headphones", "category": "tech", "price": 199.99, "stock": 0},
+#     {"id": 4, "name": "T-Shirt", "category": "clothing", "price": 29.99, "stock": 50},
+#     {"id": 5, "name": "Jeans", "category": "clothing", "price": 59.99, "stock": 30},
+#     {"id": 6, "name": "Sneakers", "category": "clothing", "price": 89.99, "stock": 15},
+#     {"id": 7, "name": "Coffee Maker", "category": "home", "price": 79.99, "stock": 8},
+#     {"id": 8, "name": "Blender", "category": "home", "price": 49.99, "stock": 12},
+# ]
+
+# @app.get("/products")
+# def get_products(q: Optional[str] = None ):
+#     results = products
+    
+#     if q:
+#         results = [p for p in results if q.lower() in p["name"].lower()]
+#     return{ "count": len(results),
+#            "filters" : {"q":  q},
+#            "results": [results]
+        
+#     }
+
+
+# @app.get("/products/categories")
+# def get_categories():
+    
+
+
+# wasnt able to get query
+
+
+
+
+
+
+#UNDERSTANDING QUERY MORE
+
+
+
+
+
+
+# from fastapi import FastAPI, Query
+# from typing import Optional
+
+# app = FastAPI()
+
+# @app.get("/items/")
+# def get_items(q: Optional[str] = None):
+#     if q:
+#         return {"searching": q}
+#     return {"all_items": "showing"}
+
+
+# # @app.get("/products/")
+# # def search(limit: int = Query(10, ge=1, le=100), min_price: float = Query(0, ge=0)):
+# #     return {
+# #         "limit": limit,
+# #         "min_price" : min_price
+# #     }
+
+# # # multiple query parameters
+# # @app.get("/products/")
+# # def filter_products(
+# #     q: Optional[str] =None,
+# #     category: Optional[str] = None,
+# #     min_price: float = Query(0, ge=0),
+# #     max_price: float = Query(10000, ge=0),
+# #     sort: str = "name",
+# #     in_stock: bool = False
+
+# # ):
+# #     return {
+# #         "filters" : {
+# #             "q" : q,
+# #             "category" : category,
+# #             "min_price" : min_price,
+# #             "max_price" : max_price,
+# #             "sort" : sort,
+# #             "in_stock" : in_stock
+# #         }
+# #     }
+
+
+# # products = [
+# #     {"name": "Laptop", "category": "tech", "price": 999},
+# #     {"name": "Phone", "category": "tech", "price": 699},
+# #     {"name": "Shirt", "category": "clothing", "price": 29}
+# # ]
+
+# # @app.get("/products/")
+# # def search(
+# #     q: Optional[str] = None,
+# #     category: Optional[str] = None,
+# #     max_price: float = Query(10000, ge=0)
+# # ):
+# #     results = products
+    
+# #     # Search by name
+# #     if q:
+# #         results = [p for p in results if q.lower() in p["name"].lower()]
+    
+# #     # Filter by category
+# #     if category:
+# #         results = [p for p in results if p["category"] == category]
+    
+# #     # Filter by price
+# #     results = [p for p in results if p["price"] <= max_price]
+    
+# #     return {"count": len(results), "results": results}
+
+
+
+
+# books = [
+#     {"id": 1, "title": "Python", "genre": "tech", "year": 2020},
+#     {"id": 2, "title": "FastAPI", "genre": "tech", "year": 2021},
+#     {"id": 3, "title": "1984", "genre": "fiction", "year": 1949}
+# ]
+
+# @app.get("/books/")
+# def search_books(
+#     q: Optional[str] = None,
+#     genre: Optional[str] = None,
+#     max_year: int = Query(2024, le=2024)
+#     # Query: optional search in title
+#     # Query: optional filter by genre
+#     # Query: optional max_year (default 2024, ≤ 2024)
+# ):
+#     results = books
+#     if q:
+#         results = [p for p in results if q.lower() in p["title"].lower()]
+    
+#     if genre:
+#         results = [p for p in results if p["genre"] == genre]
+    
+#     results = [p for p in results if p["year"] <= max_year]
+    
+    
+#     # Filter logic here
+#     return {"count": len(results), "results": results}
+
+
+
+
+from fastapi import FastAPI, Query, Path
+from typing import Optional
 
 app = FastAPI()
+books = [
+    {"id": 1, "title": "Python Crash Course", "author": "Eric Matthes", "genre": "programming", "year": 2019, "available": True, "rating": 4.8},
+    {"id": 2, "title": "Clean Code", "author": "Robert Martin", "genre": "programming", "year": 2008, "available": True, "rating": 4.7},
+    {"id": 3, "title": "1984", "author": "George Orwell", "genre": "fiction", "year": 1949, "available": False, "rating": 4.6},
+    {"id": 4, "title": "The Pragmatic Programmer", "author": "Andrew Hunt", "genre": "programming", "year": 1999, "available": True, "rating": 4.8},
+    {"id": 5, "title": "To Kill a Mockingbird", "author": "Harper Lee", "genre": "fiction", "year": 1960, "available": True, "rating": 4.9},
+    {"id": 6, "title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "genre": "fiction", "year": 1925, "available": False, "rating": 4.4},
+    {"id": 7, "title": "Introduction to Algorithms", "author": "Thomas Cormen", "genre": "computer science", "year": 2009, "available": True, "rating": 4.9},
+    {"id": 8, "title": "Pride and Prejudice", "author": "Jane Austen", "genre": "fiction", "year": 1813, "available": True, "rating": 4.6},
+]
+
+
+@app.get("/books/")
+def search_book(
+                q: Optional[str] = None,
+                genre: Optional[str] = None,
+                author: Optional[str] = None,
+                available: Optional[bool] = None,
+                min_rating: float = Query(0, le=5, ge=0),
+                min_year: int = Query(1800, ge=1800),
+                max_year: int = Query(2024, le=2024),
+                sort: str = "title",
+                limit: int = Query(10, gt=0, lt=21)
+):
+    results = books
+    if q:
+        results = [p for p in results if q.lower() in p["title"].lower()]
+    
+    if genre:
+        results = [p for p in results if p["genre"].lower() == genre.lower()]
+        
+    if author:
+        results = [p for p in results if author.lower() in p["author"].lower() ]
+    
+    if available is not None:
+        results = [p for p in results if p["available"] == available]
+
+    results = [p for p in results if p["rating"] >= min_rating]
+
+    results = [p for p in results if min_year <= p["year"] <= max_year]
+
+
+    if sort == "title":
+        results.sort(key=lambda x: x["title"])
+    elif sort == "year":
+        results.sort(key=lambda x: x["year"])
+    elif sort == "rating":
+        results.sort(key=lambda x: x["rating"])
+    elif sort == "-rating":
+        results.sort(key=lambda x: x["rating"], reverse= True)
 
 
 
-@app.get("/about")
-def about():
+
     return {
-        "name" : "Task Manager API",
-        "description" : "Manage daily tasks efficiently",
-        "author" : "Daramz",
-        "features" : ["create", "read", "update", "delete", "filter"]    
-        }
-
-@app.get("/status")
-def status():
-    return {
-        "status": "operational",
-        "database": "connected",
-        "version": "1.0",
-        "uptime" : "99.9%"
-    }
-
-@app.get("/routes")
-def routes():
-    return {
-        "endpoints": [
-        {"path": "/about", "method": "GET", "description": "API information"},
-        {"path": "/status", "method": "GET", "description": "Health check"},
-        {"path": "/routes", "method": "GET", "description": "This list"}]
+    "count": len(results),
+    "filters": {
+        "q": q,
+        "genre": genre,
+        "author": author,
+        "available": available,
+        "min_rating": min_rating,
+        "min_year": min_year,
+        "max_year": max_year,
+        "sort": sort,
+        "limit": limit
+    },
+    "results": results[:limit]  # Actually apply limit!
 }
 
-@app.get("/docs")
-def docs():
-    return {
-        "message": "Interactive API documentation",
-        "url": "http://127.0.0.1:8000/docs",
-        "alternative": "http://127.0.0.1:8000/redoc"
-    }
+@app.get("/books/{book_id}")
+def get_book(book_id: int = Path(gt=0)):
+    for book in books:
+        if book["id"] == book_id:
+            return {
+                "results" : book
+            }
+    return {"error": "Not found"}
+
+@app.get("/genres/")
+def get_genres():
+    genres = list(set(b["genre"] for b in books))
+    return {"genres": genres}
+
+@app.get("/authors/")
+def get_authors(sort: str = "name"):
+    # Count books per author
+    author_counts = {}
+    for b in books:
+        author_counts[b["author"]] = author_counts.get(b["author"], 0) + 1
+    
+    authors = [{"name": name, "book_count": count} for name, count in author_counts.items()]
+    
+    if sort == "book_count":
+        authors.sort(key=lambda x: x["book_count"], reverse=True)
+    else:  # name
+        authors.sort(key=lambda x: x["name"])
+    
+    return {"authors": authors}
