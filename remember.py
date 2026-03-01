@@ -4300,3 +4300,207 @@
 
 # if __name__ == "__main__":
 #     main()
+
+
+
+
+
+
+# revision on dictionary
+# # student = {
+# #     "name" : "Alice",
+# #     "age":20,
+# #     "grade": [85,93,78]
+# # }
+
+# # print(student["name"])
+# # print(student["age"])
+# # print(student["grade"])
+
+
+
+# # print()
+
+# # student["major"] = "CS" ## adding a new key
+
+# # if "name" in student:
+# #     print("has name")
+
+
+# # for key,value in student.items():
+# #     print(f"{key} : {value}")
+
+
+# # # # to remove key
+# # # del student["age"]
+
+
+
+
+# # # nested dic
+
+# # # dict inside dict
+
+# # students = {
+# #     "Alice": {
+# #         "math" : 85,
+# #         "science" : 92
+# #     },
+# #     "Bob" : {
+# #         "math" : 90,
+# #         "science" : 93
+
+# #     }
+# # }
+
+# # #accessing nested data
+# # print(students["Alice"])
+# # print(students["Alice"]["math"])
+
+# # #adding grade to alice
+# # students["Alice"]["english"] = 77
+
+# # #adding new student
+# # students["Charlie"] = {"math": 49}
+
+
+# # for name, grades in students.items():
+# #     print(f"\n {name}:")
+# #     for subject,score in grades.items():
+# #         print(f"{subject}: {score}")
+
+
+
+
+
+# #json pratice
+
+# # import json
+
+# # student = {
+# #     "name" : "Alice",
+# #     "age":20,
+# #     "grade": [85,93,78]
+# # }
+
+# # json_string = json.dumps(student)
+# # print(json_string)
+
+
+# # parsed  = json.loads(json_string)
+# # print(parsed["name"])
+
+
+
+
+
+# # dict -> file
+# import json
+# students = {
+#     "Alice": {
+#         "math" : 85,
+#         "science" : 92
+#     },
+#     "Bob" : {
+#         "math" : 90,
+#         "science" : 93
+
+#     }
+# }
+
+# # write to file
+# with open("grades.json", "w") as file:
+#     json.dump(students, file, indent=4)
+
+
+# # read from file
+# with open("grades.json", "r") as file:
+#     students = json.load(file)
+# print(students)
+
+
+
+# import json
+# import os
+
+# filename = "grades.json"
+
+# # Load if exists, else empty dict
+# if os.path.exists(filename):
+#     with open(filename, "r") as file:
+#         data = json.load(file)
+# else:
+#     data = {}
+
+# # Use data...
+# print(data)
+
+# # Save when done
+# with open(filename, "w") as file:
+#     json.dump(data, file, indent=2)
+
+
+
+
+# #dict+json
+# import json
+# import os
+
+# class StudentManager:
+#     def __init__(self, filename="grade.json"):
+#         self.filename = filename
+#         self.students = self.load()
+
+#     def load(self):
+#         if os.path.exists(self.filename):
+#             with open(self.filename, "r") as file:
+#                 return json.load(file)
+#         return{}
+    
+
+#     def save(self):
+#         with open(self.filename, "w") as file:
+#             json.dump(self.students, file,indent=4)
+
+
+#     def add_student(self,name):
+#         if name in self.students:
+#             return False
+        
+#         self.students[name] = {}
+#         self.save
+#         return True
+    
+
+# manager = StudentManager()
+# manager.load()
+# manager.add_student("alice")
+
+
+# import os
+# import json
+
+
+
+# student = {
+#     "alice": {
+#         "english":30,
+#         "math" : 45,
+#         "chem" : 90
+#     }
+# }
+
+# #save
+# with open("test.json", "w") as file:
+#     json.dump(student, file, indent=4)
+
+# #load -- in order to print
+# with open("test.json", "r") as file:
+#     data = json.load(file)
+
+# print("Loaded data: ", data)
+
+# grades = data["alice"]
+# average = sum(grades.value) / len(grades)
+# print(f"Average: {average:.2f}")
+

@@ -646,106 +646,106 @@
 
 
 
-from fastapi import FastAPI, Query, Path
-from typing import Optional
+# from fastapi import FastAPI, Query, Path
+# from typing import Optional
 
-app = FastAPI()
-books = [
-    {"id": 1, "title": "Python Crash Course", "author": "Eric Matthes", "genre": "programming", "year": 2019, "available": True, "rating": 4.8},
-    {"id": 2, "title": "Clean Code", "author": "Robert Martin", "genre": "programming", "year": 2008, "available": True, "rating": 4.7},
-    {"id": 3, "title": "1984", "author": "George Orwell", "genre": "fiction", "year": 1949, "available": False, "rating": 4.6},
-    {"id": 4, "title": "The Pragmatic Programmer", "author": "Andrew Hunt", "genre": "programming", "year": 1999, "available": True, "rating": 4.8},
-    {"id": 5, "title": "To Kill a Mockingbird", "author": "Harper Lee", "genre": "fiction", "year": 1960, "available": True, "rating": 4.9},
-    {"id": 6, "title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "genre": "fiction", "year": 1925, "available": False, "rating": 4.4},
-    {"id": 7, "title": "Introduction to Algorithms", "author": "Thomas Cormen", "genre": "computer science", "year": 2009, "available": True, "rating": 4.9},
-    {"id": 8, "title": "Pride and Prejudice", "author": "Jane Austen", "genre": "fiction", "year": 1813, "available": True, "rating": 4.6},
-]
+# app = FastAPI()
+# books = [
+#     {"id": 1, "title": "Python Crash Course", "author": "Eric Matthes", "genre": "programming", "year": 2019, "available": True, "rating": 4.8},
+#     {"id": 2, "title": "Clean Code", "author": "Robert Martin", "genre": "programming", "year": 2008, "available": True, "rating": 4.7},
+#     {"id": 3, "title": "1984", "author": "George Orwell", "genre": "fiction", "year": 1949, "available": False, "rating": 4.6},
+#     {"id": 4, "title": "The Pragmatic Programmer", "author": "Andrew Hunt", "genre": "programming", "year": 1999, "available": True, "rating": 4.8},
+#     {"id": 5, "title": "To Kill a Mockingbird", "author": "Harper Lee", "genre": "fiction", "year": 1960, "available": True, "rating": 4.9},
+#     {"id": 6, "title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "genre": "fiction", "year": 1925, "available": False, "rating": 4.4},
+#     {"id": 7, "title": "Introduction to Algorithms", "author": "Thomas Cormen", "genre": "computer science", "year": 2009, "available": True, "rating": 4.9},
+#     {"id": 8, "title": "Pride and Prejudice", "author": "Jane Austen", "genre": "fiction", "year": 1813, "available": True, "rating": 4.6},
+# ]
 
 
-@app.get("/books/")
-def search_book(
-                q: Optional[str] = None,
-                genre: Optional[str] = None,
-                author: Optional[str] = None,
-                available: Optional[bool] = None,
-                min_rating: float = Query(0, le=5, ge=0),
-                min_year: int = Query(1800, ge=1800),
-                max_year: int = Query(2024, le=2024),
-                sort: str = "title",
-                limit: int = Query(10, gt=0, lt=21)
-):
-    results = books
-    if q:
-        results = [p for p in results if q.lower() in p["title"].lower()]
+# @app.get("/books/")
+# def search_book(
+#                 q: Optional[str] = None,
+#                 genre: Optional[str] = None,
+#                 author: Optional[str] = None,
+#                 available: Optional[bool] = None,
+#                 min_rating: float = Query(0, le=5, ge=0),
+#                 min_year: int = Query(1800, ge=1800),
+#                 max_year: int = Query(2024, le=2024),
+#                 sort: str = "title",
+#                 limit: int = Query(10, gt=0, lt=21)
+# ):
+#     results = books
+#     if q:
+#         results = [p for p in results if q.lower() in p["title"].lower()]
     
-    if genre:
-        results = [p for p in results if p["genre"].lower() == genre.lower()]
+#     if genre:
+#         results = [p for p in results if p["genre"].lower() == genre.lower()]
         
-    if author:
-        results = [p for p in results if author.lower() in p["author"].lower() ]
+#     if author:
+#         results = [p for p in results if author.lower() in p["author"].lower() ]
     
-    if available is not None:
-        results = [p for p in results if p["available"] == available]
+#     if available is not None:
+#         results = [p for p in results if p["available"] == available]
 
-    results = [p for p in results if p["rating"] >= min_rating]
+#     results = [p for p in results if p["rating"] >= min_rating]
 
-    results = [p for p in results if min_year <= p["year"] <= max_year]
-
-
-    if sort == "title":
-        results.sort(key=lambda x: x["title"])
-    elif sort == "year":
-        results.sort(key=lambda x: x["year"])
-    elif sort == "rating":
-        results.sort(key=lambda x: x["rating"])
-    elif sort == "-rating":
-        results.sort(key=lambda x: x["rating"], reverse= True)
+#     results = [p for p in results if min_year <= p["year"] <= max_year]
 
 
+#     if sort == "title":
+#         results.sort(key=lambda x: x["title"])
+#     elif sort == "year":
+#         results.sort(key=lambda x: x["year"])
+#     elif sort == "rating":
+#         results.sort(key=lambda x: x["rating"])
+#     elif sort == "-rating":
+#         results.sort(key=lambda x: x["rating"], reverse= True)
 
 
-    return {
-    "count": len(results),
-    "filters": {
-        "q": q,
-        "genre": genre,
-        "author": author,
-        "available": available,
-        "min_rating": min_rating,
-        "min_year": min_year,
-        "max_year": max_year,
-        "sort": sort,
-        "limit": limit
-    },
-    "results": results[:limit]  # Actually apply limit!
-}
 
-@app.get("/books/{book_id}")
-def get_book(book_id: int = Path(gt=0)):
-    for book in books:
-        if book["id"] == book_id:
-            return {
-                "results" : book
-            }
-    return {"error": "Not found"}
 
-@app.get("/genres/")
-def get_genres():
-    genres = list(set(b["genre"] for b in books))
-    return {"genres": genres}
+#     return {
+#     "count": len(results),
+#     "filters": {
+#         "q": q,
+#         "genre": genre,
+#         "author": author,
+#         "available": available,
+#         "min_rating": min_rating,
+#         "min_year": min_year,
+#         "max_year": max_year,
+#         "sort": sort,
+#         "limit": limit
+#     },
+#     "results": results[:limit]  # Actually apply limit!
+# }
 
-@app.get("/authors/")
-def get_authors(sort: str = "name"):
-    # Count books per author
-    author_counts = {}
-    for b in books:
-        author_counts[b["author"]] = author_counts.get(b["author"], 0) + 1
+# @app.get("/books/{book_id}")
+# def get_book(book_id: int = Path(gt=0)):
+#     for book in books:
+#         if book["id"] == book_id:
+#             return {
+#                 "results" : book
+#             }
+#     return {"error": "Not found"}
+
+# @app.get("/genres/")
+# def get_genres():
+#     genres = list(set(b["genre"] for b in books))
+#     return {"genres": genres}
+
+# @app.get("/authors/")
+# def get_authors(sort: str = "name"):
+#     # Count books per author
+#     author_counts = {}
+#     for b in books:
+#         author_counts[b["author"]] = author_counts.get(b["author"], 0) + 1
     
-    authors = [{"name": name, "book_count": count} for name, count in author_counts.items()]
+#     authors = [{"name": name, "book_count": count} for name, count in author_counts.items()]
     
-    if sort == "book_count":
-        authors.sort(key=lambda x: x["book_count"], reverse=True)
-    else:  # name
-        authors.sort(key=lambda x: x["name"])
+#     if sort == "book_count":
+#         authors.sort(key=lambda x: x["book_count"], reverse=True)
+#     else:  # name
+#         authors.sort(key=lambda x: x["name"])
     
-    return {"authors": authors}
+#     return {"authors": authors}
