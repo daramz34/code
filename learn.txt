@@ -355,3 +355,123 @@ def f(results=None):
 | **Fix your code** | Apply these fixes to your projects |
 
 **Which?**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+WHY DATABASE
+books = [
+    {"id": 1, "title": "Python"},
+    {"id": 2, "title": "FastAPI"}
+]
+
+| Problem         | What Happens                         |
+| --------------- | ------------------------------------ |
+| Server restarts | `books` resets to empty              |
+| Multiple users  | Each sees different data             |
+| Data disappears | Gone forever when you close terminal |
+
+Database = Permanent Storage
+
+| Feature                   | Benefit                           |
+| ------------------------- | --------------------------------- |
+| File on disk (`items.db`) | Survives server restarts          |
+| SQLite                    | No setup, just a file             |
+| SQLAlchemy                | Talk to database with Python code |
+
+The three pieces
+
+
+| Piece     | Job                              | Analogy        |
+| --------- | -------------------------------- | -------------- |
+| `Engine`  | Connection to database file      | Phone line     |
+| `Session` | Do the work (add, query, commit) | Phone call     |
+| `Base`    | Blueprint for all tables         | Stamp template |
+
+from sqlalchemy import create_engine
+
+engine = create_engine("sqlite:///./items.db") ## sqlite:// --> using SQLite database  ./items.db ---> file name
+
+
+
+# Session --> Do the work
+from sqlalchemy.orm import sessionmaker
+
+SessionLocal = sessionmaker(bind=engine)
+db = SessionLocal()
+db.add(item)
+db.commit()
+db.close()
+
+| Method           | Action           |
+| ---------------- | ---------------- |
+| `db.add(item)`   | Stage for insert |
+| `db.commit()`    | Actually save    |
+| `db.query(Item)` | Ask question     |
+| `db.close()`     | Done             |
+
+
+# Base --> Blueprint for tables
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+class Item(Base):   # this class == database table
+    __tablename__ = "items"
+    id = Column(...)
+    name = Column(...)
+
+
+
+model 
+-- is a python class that Defines oyur databasetable structure
+| Python                                   | Becomes SQL                |
+| ---------------------------------------- | -------------------------- |
+| `class Item(Base)`                       | `CREATE TABLE items (...)` |
+| `id = Column(Integer, primary_key=True)` | `id INTEGER PRIMARY KEY`   |
+| `name = Column(String)`                  | `name TEXT`                |
+| `price = Column(Float)`                  | `price REAL`               |
+
+
+
+#model
+from sqlalchemy import Column, Integer, String, Float
+from database import Base
+
+class Item(Base):
+     __tablename__ = "items"  # Table name in SQLite
+     id = Column(Integer, primary_key=True, index=True)
+     name = Column(String, index=True)
+     description = Column(String)
+     price = Column(Float)
+
+| Type       | Python           | SQL        | Use For             |
+| ---------- | ---------------- | ---------- | ------------------- |
+| `Integer`  | `123`            | `INTEGER`  | IDs, counts         |
+| `String`   | `"text"`         | `TEXT`     | Names, descriptions |
+| `Float`    | `99.99`          | `REAL`     | Prices, decimals    |
+| `DateTime` | `datetime.now()` | `DATETIME` | Timestamps          |
+| `Boolean`  | `True/False`     | `BOOLEAN`  | Flags               |
+
+
+
+CRUD
+| Letter     | SQL    | SQLAlchemy          | HTTP   |
+| ---------- | ------ | ------------------- | ------ |
+| **C**reate | INSERT | `session.add()`     | POST   |
+| **R**ead   | SELECT | `session.query()`   | GET    |
+| **U**pdate | UPDATE | Modify + `commit()` | PUT    |
+| **D**elete | DELETE | `session.delete()`  | DELETE |

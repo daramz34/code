@@ -749,3 +749,46 @@
 #         authors.sort(key=lambda x: x["name"])
     
 #     return {"authors": authors}
+
+
+
+
+# #Engine --> connection
+# from sqlalchemy import create_engine
+
+# engine = create_engine("sqlite:///./items.db") ## sqlite:// --> using SQLite database  ./items.db ---> file name
+
+
+
+# # Session --> Do the work
+# from sqlalchemy.orm import sessionmaker
+
+# SessionLocal = sessionmaker(bind=engine)
+# db = SessionLocal()
+# db.add(item)
+# db.commit()
+# db.close()
+
+
+# # Base --> Blueprint for tables
+# from sqlalchemy.ext.declarative import declarative_base
+
+# Base = declarative_base()
+
+# class Item(Base):
+#     __tablename__ = "items"
+#     id = Column(...)
+#     name = Column(...)
+
+
+
+# #model
+# from sqlalchemy import Column, Integer, String, Float
+# from database import Base
+
+# class Item(Base):
+#      __tablename__ = "items"  # Table name in SQLite
+#      id = Column(Integer, primary_key=True, index=True)
+#      name = Column(String, index=True)
+#      description = Column(String)
+#      price = Column(Float)
