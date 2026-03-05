@@ -1,5 +1,5 @@
-from database import SessionLocal
-from model import Item
+from fast_api2.database import SessionLocal
+from fast_api2.model import Item
 
 
 def create_item(name: str,
