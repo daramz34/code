@@ -40,9 +40,12 @@ class Personal_expense:
             for index, value in enumerate(file, 1):
                 print(index, value)
             
-            for line in file:
-                smth += int(line[self.price])
-            print(smth)
+            if self.price in file:
+                print("hhhhhhh")
+                # for self.price in file.readlines:
+                #     print(self.price)
+            else:
+                print("byyyyyy")
             # trying to add the total here
         
             
@@ -59,5 +62,5 @@ class Personal_expense:
     
 
 hi = Personal_expense()
-hi.add_expense()
+#hi.add_expense()
 hi.view()
