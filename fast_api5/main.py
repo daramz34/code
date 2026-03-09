@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fast_api5.database import engine, Base, SessionLocal
-from schema import ItemResponse, ItemCreate
-from models import Task
+from fast_api5.schema import ItemResponse, ItemCreate
+from fast_api5.models import Task
 
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
