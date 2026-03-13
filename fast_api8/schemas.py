@@ -10,6 +10,7 @@ class ItemCreate(BaseModel):
 
 
 class ItemResponse(BaseModel):
+    id: int
     name: str
     price: float
     description: Optional[str] = None
