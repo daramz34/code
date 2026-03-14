@@ -44,22 +44,25 @@
 
 
 
-from fastapi import FastAPI
+# from fastapi import FastAPI
 
-app = FastAPI()
-@app.get("/")
-def welcome():
-    return {"Message": "Welcome!!!"}
+# app = FastAPI()
+# @app.get("/")
+# def welcome():
+#     return {"Message": "Welcome!!!"}
 
-@app.get("/profile/{username}")
-def create_profile(username: str):
-    return {"Username": username, "Status": "Active"}
+# @app.get("/profile/{username}")
+# def create_profile(username: str):
+#     return {"Username": username, "Status": "Active"}
 
-@app.get("/post/{post_id}")
-def create_post(post_id: int):
-    return {"Post ID": post_id, "Title": "Sample Post"}
+# @app.get("/post/{post_id}")
+# def create_post(post_id: int):
+#     return {"Post ID": post_id, "Title": "Sample Post"}
 
-@app.get("/product/{product_name}")
-def create_product(product_name: str, price: float = 99.99):
-    return {"Product": product_name, "Price": price}
+# @app.get("/product/{product_name}")
+# def create_product(product_name: str, price: float = 99.99):
+#     return {"Product": product_name, "Price": price}
+
+
+
 
