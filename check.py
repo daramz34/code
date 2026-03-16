@@ -65,22 +65,45 @@
 
 
 
-from datetime import datetime, date, time, timedelta
+# from datetime import datetime, date, time, timedelta
 
-# 1. Get the current date and time
-now = datetime.now()
-print("Current datetime:", now)
-
-
-formatted = now.strftime("%Y-%m-%d %H:%M:%S")
-print("Formatted datetime:", formatted)
+# # 1. Get the current date and time
+# now = datetime.now()
+# print("Current datetime:", now)
 
 
-import os
-directory_name = "GfG"
+# formatted = now.strftime("%Y-%m-%d %H:%M:%S")
+# print("Formatted datetime:", formatted)
 
-try:
-    os.mkdir(directory_name)
-    print(f"Directory {directory_name} created successfully.")
-except FileExistsError:
-    print("bbb")
+
+# import os
+# directory_name = "GfG"
+
+# try:
+#     os.mkdir(directory_name)
+#     print(f"Directory {directory_name} created successfully.")
+# except FileExistsError:
+#     print("bbb")
+
+
+
+# import library
+import math, random
+
+# function to generate OTP
+def generateOTP() :
+
+    # Declare a string variable  
+    # which stores all string 
+    string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    OTP = ""
+    length = len(string)
+    for i in range(6) :
+        OTP += string[math.floor(random.random() * length)]
+
+    return OTP
+
+# Driver code
+if __name__ == "__main__" :
+    
+    print("OTP of length 6:", generateOTP())

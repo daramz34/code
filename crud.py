@@ -1,22 +1,44 @@
-from sqlalchemy.orm  import Session
-from models import Items
-from schemas import Itemcreate
+from sqlalchemy.orm import Session
+from models import URL
+from schema import UserCreate
+import random, string
 
 
-def get_item(db:Session):
-    return db.query(Items).all()
 
-def create_item(db:Session, item: Itemcreate):
-    db_item = Items(**item.model_dump())
-    db.add(db_item)
+
+
+def gen_short_code(length=6):
+    chars= string.ascii_letters + string.digits
+    return "".join(random.choice(chars) for _ in range(length))
+
+def create_url(db:Session, url:UserCreate):
+    short_code = gen_short_code()
+    db_url = URL(
+        url=url.url,
+        short_code=short_code
+    )
+    db.add(db_url)
     db.commit()
-    db.refresh(db_item)
-    return db_item
+    db.refresh(db_url)
+    return db_url
 
-def delete_item(db:Session, item_id:int):
-    db_item = db.query(Items).filter(Items.id == item_id).first()
-    if db_item:
-        db.delete(db_item)
+
+def get_url(db: Session, url_id: int):
+    db_url = db.query(URL).filter(URL.id == url_id).first()
+
+    return db_url
+
+def get_all_urls(db:Session):
+    db_url = db.query(URL).all()
+    return db_url
+
+
+
+def delete_url(db:Session, url_id:int):
+    db_url = db.query(URL).filter(URL.id == url_id).first()
+
+    if db_url:
+        db.delete(db_url)
         db.commit()
         return True
     return False
