@@ -4,6 +4,7 @@ from typing import List
 from fast_api10.database import Base, engine, SessionLocal
 import fast_api10.crud as crud
 from fast_api10.schemas import Itemcreate, ItemReponse
+
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -67,6 +68,7 @@ def get_item_routes(item_id: int, db:Session = Depends(get_db)):
             status_code=status.HTTP_404_NOT_FOUND,
             detail="item does not exist"
         )
+    return item
 
 
 @app.delete("/items/{item_id}", status_code=status.HTTP_204_NO_CONTENT)
