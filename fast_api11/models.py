@@ -1,4 +1,4 @@
-from database import Base
+from fast_api12.database import Base
 from sqlalchemy import Column, String, Float, Integer
 import random, string
 

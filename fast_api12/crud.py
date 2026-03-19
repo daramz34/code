@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from models import Items
-from schemas import Itemcreate
+from fast_api12.models import Items
+from fast_api12.schemas import Itemcreate
 
 
 def get_items(db:Session, skip: int=0, limit: int = 10, max_price: float = None):

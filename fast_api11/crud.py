@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models import URL
+from fast_api12.models import URL
 from schema import UserCreate
 import random, string
 

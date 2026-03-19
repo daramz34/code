@@ -1,8 +1,8 @@
 from fastapi import FastAPI, status, HTTPException, Depends
 
-import crud
+import fast_api12.crud as crud
 from sqlalchemy.orm import Session
-from database import engine, Base, SessionLocal
+from fast_api12.database import engine, Base, SessionLocal
 from schema import UserResponse, UserCreate
 from typing import List
 Base.metadata.create_all(bind=engine)

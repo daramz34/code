@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Depends, status, HTTPException
-import crud
-from models import Items
+import fast_api12.crud as crud
+from fast_api12.models import Items
 from sqlalchemy.orm import Session
-from database import engine, SessionLocal, Base
-from schemas import Itemcreate, Itemresponse
+from fast_api12.database import engine, SessionLocal, Base
+from fast_api12.schemas import Itemcreate, Itemresponse
 
 
 
