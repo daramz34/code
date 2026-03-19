@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from models import Items
-from schemas import ItemCreate
-from database import SessionLocal
+from fast_api13.models import Items
+from fast_api13.schemas import ItemCreate
+from fast_api13.database import SessionLocal
 
 
 

@@ -87,23 +87,36 @@
 
 
 
-# import library
-import math, random
+# # import library
+# import math, random
 
-# function to generate OTP
-def generateOTP() :
+# # function to generate OTP
+# def generateOTP() :
 
-    # Declare a string variable  
-    # which stores all string 
-    string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    OTP = ""
-    length = len(string)
-    for i in range(6) :
-        OTP += string[math.floor(random.random() * length)]
+#     # Declare a string variable  
+#     # which stores all string 
+#     string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+#     OTP = ""
+#     length = len(string)
+#     for i in range(6) :
+#         OTP += string[math.floor(random.random() * length)]
 
-    return OTP
+#     return OTP
 
-# Driver code
-if __name__ == "__main__" :
+# # Driver code
+# if __name__ == "__main__" :
     
-    print("OTP of length 6:", generateOTP())
+#     print("OTP of length 6:", generateOTP())
+
+
+
+
+
+import uuid
+
+my_id = uuid.uuid4()
+
+print(f"My new id: {my_id}")
+
+print(f"Type: {type(my_id)}")
+print(f"String Version: {str(my_id)}")
