@@ -112,11 +112,24 @@
 
 
 
-import uuid
+# import uuid
 
-my_id = uuid.uuid4()
+# my_id = uuid.uuid4()
 
-print(f"My new id: {my_id}")
+# print(f"My new id: {my_id}")
 
-print(f"Type: {type(my_id)}")
-print(f"String Version: {str(my_id)}")
+# print(f"Type: {type(my_id)}")
+# print(f"String Version: {str(my_id)}")
+
+
+
+# def add_five(x):
+#     return x + 5
+
+# print(add_five(10)) # Output: 15
+
+
+#  (input) : (action/return)
+add_five = lambda x: x + 5
+
+print(add_five(10)) # Output: 15

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-import user
+import router_learn.user as user
 
 app = FastAPI()
 
