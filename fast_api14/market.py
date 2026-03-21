@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from schemas import Itemcreate, ItemResponse
-from models import Student
-from database import get_db
+from fast_api14.schemas import Itemcreate, ItemResponse
+from fast_api14.models import Student
+from fast_api14.database import get_db
 from crud import create_item, get_all_items
 
 
