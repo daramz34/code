@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from fast_api14.schemas import StudResponse, StudCreate
 from fast_api14.models import Student
 from fast_api14.database import get_db
-from crud import create_stud_data, get_stud
+from fast_api14.crud import create_stud_data, get_stud
 
 
 router = APIRouter(prefix="/students", tags=["STUDENTS"])
