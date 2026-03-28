@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
-from database import Base
+from fast_api15.database import Base
 import uuid
 
 

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models import Student, Item
-from schemas import ItemCreate, StudentCreate
+from fast_api15.models import Student, Item
+from fast_api15.schemas import ItemCreate, StudentCreate
 
 
 

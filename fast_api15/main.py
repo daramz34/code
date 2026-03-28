@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-import models
-from database import engine,  Base
-import stud_routes, market_routes
+import fast_api15.models as models
+from fast_api15.database import engine,  Base
+import fast_api15.stud_routes as stud_routes, fast_api15.market_routes as market_routes
 
 Base.metadata.create_all(bind=engine)
 

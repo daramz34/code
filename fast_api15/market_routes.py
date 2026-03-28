@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from database import get_db
-import crud, schemas, models
+from fast_api15.database import get_db
+import fast_api15.crud as crud, fast_api15.schemas as schemas, fast_api15.models as models
 
 
 router = APIRouter(prefix="/market", tags=["MARKET"])
