@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models import Equipment, User
-from schemas import EquipmentCreate, UserCreate
+from fast_api16.models import Equipment, User
+from fast_api16.schemas import EquipmentCreate, UserCreate
 
 
 

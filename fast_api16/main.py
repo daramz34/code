@@ -1,12 +1,16 @@
 from fastapi import FastAPI
-import user_routes, equipment_routes
-from database import Base, engine
+import fast_api16.user_routes as user_routes, fast_api16.equipment_routes as equipment_routes
+from fast_api16.database import Base, engine
 
 
 app= FastAPI(
     title="CAMPUS RENTAL APP",
     description="Place for renting stuff",
-    version="1.0"
+    version="1.0",
+    contact={
+        "name": "Daramz",
+        "url": "https://github.com/dashboard"
+    }
 )
 
 
