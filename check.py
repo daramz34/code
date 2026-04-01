@@ -129,7 +129,47 @@
 # print(add_five(10)) # Output: 15
 
 
-#  (input) : (action/return)
-add_five = lambda x: x + 5
+# #  (input) : (action/return)
+# add_five = lambda x: x + 5
 
-print(add_five(10)) # Output: 15
+# print(add_five(10)) # Output: 15
+
+
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def signup_simulation(raw_password:str):
+    print(f"User Typed: {raw_password}")
+
+
+    hashed_password = pwd_context.hash(raw_password)
+
+    print(f"Stored in DB: {hashed_password}")
+    return hashed_password
+
+
+
+
+
+def login_simulation(typed_password: str, stored_hash: str):
+    print(f"User is trying: {typed_password}")
+
+
+
+    is_correct = pwd_context.verify(typed_password, stored_hash)
+
+
+    if is_correct:
+        print(" Access granted, welcome back")
+    else:
+        print("Access Denied, Wrong password")
+
+
+
+db_secret_code = signup_simulation("BleachIStheBest222")
+
+# login_simulation("Zoroisthee", db_secret_code)
+
+
+login_simulation("BleachIStheBest222", db_secret_code)
