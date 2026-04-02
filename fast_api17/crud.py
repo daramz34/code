@@ -1,7 +1,7 @@
-from schemas import UserCreate, EquipmentCreate
+from fast_api17.schemas import UserCreate, EquipmentCreate
 from sqlalchemy.orm import Session
-from models import User, Equipment
-from security import get_password_hash
+from fast_api17.models import User, Equipment
+from fast_api17.security import get_password_hash
 
 
 

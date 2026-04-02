@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
-from schemas import EquipmentCreate, EquipmentResponsre
+from fast_api17.schemas import EquipmentCreate, EquipmentResponsre
 from sqlalchemy.orm import Session
-from database import get_db
-from crud import get_equipmenT, create_equipment
+from fast_api17.database import get_db
+from fast_api17.crud import get_equipmenT, create_equipment
 
 
 router = APIRouter(prefix="/equipment", tags=["Equipment"])

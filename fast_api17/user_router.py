@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
-from database import get_db
+from fast_api17.database import get_db
 from sqlalchemy.orm import Session
-from crud import create_user, get_user
-from schemas import UserCreate, UserResponse
+from fast_api17.crud import create_user, get_user
+from fast_api17.schemas import UserCreate, UserResponse
 
 
 
