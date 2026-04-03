@@ -563,3 +563,9 @@ This is the "Search" functionality. Instead of getting everything, you only want
 | **Return Type** | A single object | A List of objects | Displaying multiple results |
 
 ---
+
+
+
+
+
+JWT
