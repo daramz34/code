@@ -1,26 +1,18 @@
+from fastapi import FastAPI
 import jwt
 
-
-SECRET = "mybankai"
-
-
-token = jwt.encode(
-    {"id": "1",
-     "name": "daramz",
-     "job": "back_dev"},
-    SECRET,
-    algorithm="HS256"
-)
-print("Token: ", token)
-
-
-data = jwt.decode(token, SECRET, algorithms=["HS256"])
-# print("Decoded: ", data)
+app = FastAPI()
+SECRET = "mybankai_secret_key_32bytes_long"
+ALGORITHM = "HS256"
 
 
 
 
-try:
-    fake = jwt.decode(token, "wrongsecret", algorithms=["HS256"])
-except jwt.InvalidTokenError as e:
-    print("Error:", e)
+@app.get("/get-token")
+def get_token():
+    payload = {
+        "user_id" : 1,
+        "name" : "daramz"
+    }
+    token = jwt.encode(payload,  SECRET, algorithm=ALGORITHM)
+    return {"token": token}
