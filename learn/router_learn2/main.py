@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-import router_learn2.router as router
-from router_learn2.database import Base, engine
+import learn.router_learn2.router as router
+from learn.router_learn2.database import Base, engine
 
 
 app= FastAPI()

@@ -5,9 +5,9 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import jwt
 import os
-from database import get_db
-from schemas import LoginRequest, TokenResponse, UserCreate, UserResponse
-from crud import authenticate_user, create_user
+from fast_api18.database import get_db
+from fast_api18.schemas import LoginRequest, TokenResponse, UserCreate, UserResponse
+from fast_api18.crud import authenticate_user, create_user
 
 
 

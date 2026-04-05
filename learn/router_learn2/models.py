@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Float
 import uuid
-from router_learn2.database import Base
+from learn.router_learn2.database import Base
 
 
 

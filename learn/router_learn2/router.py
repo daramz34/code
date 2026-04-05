@@ -1,7 +1,7 @@
 from fastapi import Depends, APIRouter, HTTPException, status
 from sqlalchemy.orm import Session
-from  router_learn2.models import Student
-from router_learn2.database import SessionLocal
+from  learn.router_learn2.models import Student
+from learn.router_learn2.database import SessionLocal
 
 router = APIRouter(prefix="/students", tags=["STUDENTS"])
 

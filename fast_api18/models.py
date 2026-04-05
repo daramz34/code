@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Integer
-from database import Base
+from fast_api18.database import Base
 
 
 class Auth(Base):
