@@ -1,20 +1,24 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from pydantic import BaseModel
 import jwt
+from pydantic import BaseModel
+from passlib.context import CryptContext
+
 
 app = FastAPI()
 
-
-SECRET = "my_bankai_secret_key_32bytes_long"
+SECRET = "mybankai_secret_key_32bytes_long"
 ALGORITHM = "HS256"
 
-security = HTTPBearer()
-users = {
-    "daramz": "password1222",
-    "john": "john2929"
-}
 
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+security = HTTPBearer()
+
+
+users = {
+    "daramz": pwd_context.hash("password123"),
+    "john": pwd_context.hash("john456")
+}
 
 
 class LoginData(BaseModel):
@@ -31,26 +35,26 @@ def check_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Token Expired")
     except jwt.InvalidTokenError:
-        raise HTTPException(status_code=401, detail="Invalid token")
+        raise HTTPException(status_code=401, detail="invalid token")
     
 
 
 
-@app.post("/")
-def login(data: LoginData):
-    if data.username not in users:
-        raise HTTPException(status_code=401, detail="Invalid username or password")
+@app.post("/login")
+def Login(data: LoginData):
+    if data.username not in users: 
+        raise HTTPException(status_code=401, detail="invalid username or password")
     
-    if users[data.username] != data.password:
-        raise HTTPException(status_code=401, detail="Invalid username or password")
+    if not pwd_context.verify(data.password, users[data.username]):
+        raise HTTPException(status_code=401, detail="invalid username or password")
     
     token = jwt.encode({"username": data.username}, SECRET, algorithm=ALGORITHM)
-    return {"access_token": token, 
-            "token_type": "bearer"}
+
+    return {"Access_token": token}
 
 @app.get("/secret")
-def secret_route(current_user: dict = Depends(check_token)):
-    return {
-        "message": "You are in",
+def secret_route(current_user: dict= Depends(check_token)):
+    return{
+        "Message": "BOYAHH",
         "user": current_user["username"]
     }
