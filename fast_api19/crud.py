@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from schemas import UserCreate
-from models import User
+from fast_api19.schemas import UserCreate
+from fast_api19.models import User
 from passlib.context import CryptContext
 
 

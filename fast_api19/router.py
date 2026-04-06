@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from crud import create_user, authenticate_user
-from models import User
-from database import get_db
+from fast_api19.crud import create_user, authenticate_user
+from fast_api19.models import User
+from fast_api19.database import get_db
 import jwt, os
-from schemas import UserCreate, LoginRequest, TokenResponse
+from fast_api19.schemas import UserCreate, LoginRequest, TokenResponse
 from dotenv import load_dotenv
 
 
